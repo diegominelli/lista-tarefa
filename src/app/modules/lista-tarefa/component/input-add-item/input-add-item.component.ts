@@ -3,16 +3,18 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   Output,
   ViewChild,
   inject,
 } from '@angular/core';
 import { IListItems } from '../../interface/IListItems.interface';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-input-add-item',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './input-add-item.component.html',
   styleUrl: './input-add-item.component.scss',
 })
@@ -21,18 +23,19 @@ export class InputAddItemComponent {
 
   @ViewChild('inputText') public inputText!: ElementRef;
 
-  @Output() public outputListItems = new EventEmitter<IListItems>();
+  @Input({ required: true }) public inptListItems: IListItems[] = [];
+  @Output() public outputAddListItems = new EventEmitter<IListItems>();
 
   public focusAndAddItem(value: string) {
     if (value) {
       this.#cdr.detectChanges();
       this.inputText.nativeElement.value = '';
 
-      const dataAtual = new Date();
-      const timestamp = dataAtual.getTime();
+      const currentDate = new Date();
+      const timestamp = currentDate.getTime();
       const id = `ID ${timestamp}`;
 
-      this.outputListItems.emit({
+      this.outputAddListItems.emit({
         id,
         checked: false,
         value,

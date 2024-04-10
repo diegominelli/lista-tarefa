@@ -11,6 +11,9 @@
   </button>
 
   }@else {
-  <app-input-add-item />
+  <app-input-add-item
+    [inptListItems]="getListItems()"
+    (outputAddListItems)="getInputAndAddItem($event)"
+  />
   }
 </div>
