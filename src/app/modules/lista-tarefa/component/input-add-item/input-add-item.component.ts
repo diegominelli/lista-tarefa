@@ -23,7 +23,7 @@ export class InputAddItemComponent {
 
   @ViewChild('inputText') public inputText!: ElementRef;
 
-  @Input({ required: true }) public inptListItems: IListItems[] = [];
+  @Input({ required: true }) public inputListItems: IListItems[] = [];
   @Output() public outputAddListItems = new EventEmitter<IListItems>();
 
   public focusAndAddItem(value: string) {
